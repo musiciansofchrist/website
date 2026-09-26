@@ -33,58 +33,43 @@
             margin: 0 auto;
             position: relative;
         }
-        
-        /* HEADER - This section stays permanently loaded at the top of every page layout view */
-        .header-nav-section {
-            width: 100%;
-            position: relative;
-            display: block;
-        }
-        .header-nav-section img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
 
-        /* HEADER INTERACTIVE HOTSPOT NAVIGATION ROW */
-        .nav-overlay-container {
-            position: absolute;
+        /* FIXED GLOBAL NAVIGATION LAYER - Sits perfectly over the header menu of every page */
+        .global-nav-overlay {
+            position: fixed;
             top: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
-            height: 100%; 
+            max-width: 1200px;
+            height: 75px; /* Fits exactly over the top heading text row */
             display: flex;
             justify-content: flex-end; 
             align-items: center;
-            padding-right: 4%;
-            z-index: 10;
+            padding-right: 3%;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0); /* Completely clear invisible buttons */
         }
         .nav-link-hotspot {
-            height: 40px;
-            margin-left: 20px;
+            height: 45px;
+            margin-left: 15px;
             cursor: pointer;
             display: inline-block;
             background: rgba(255, 255, 255, 0); 
-            text-decoration: none;
-            width: 70px; 
+            width: 75px; 
         }
-        .width-founder { width: 140px; }
-        .width-sync { width: 130px; }
+        .width-founder { width: 145px; }
+        .width-sync { width: 135px; }
 
-        /* MULTI-PAGE VIEW ROUTER CODE */
-        /* Hides all sub-pages completely from view by default */
+        /* MULTI-PAGE CONTROLLER */
         .canva-page-view {
             width: 100%;
             position: relative;
-            display: none; 
+            display: none; /* Hides all pages by default to prevent overlapping long scrolling */
         }
-        
-        /* This active CSS class forces the currently selected target page to display dynamically */
-        .canva-page-view:target, 
-        .page-active-default {
-            display: block !important;
+        .active-page {
+            display: block !important; /* Only shows the single selected active layout */
         }
-        
         .canva-page-view img {
             width: 100%;
             height: auto;
@@ -94,11 +79,11 @@
         /* Dynamic Streaming Stores Button Overlay Grid */
         .music-stores-overlay {
             position: absolute;
-            bottom: 10%; 
+            bottom: 12%; 
             left: 50%;
             transform: translateX(-50%);
             width: 70%; 
-            height: 10%;
+            height: 9%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -113,20 +98,20 @@
             background: rgba(255, 255, 255, 0);
         }
 
-        /* Reusable Transparent Hotspot Link Wrappers */
+        /* Direct Click-to-Email Hotspot Wrapper for Sync Page */
         .sync-email-hotspot {
             position: absolute;
-            top: 20%;
-            left: 5%;
-            width: 90%;
-            height: 60%;
+            top: 25%;
+            left: 10%;
+            width: 80%;
+            height: 50%;
             cursor: pointer;
             background: rgba(255, 255, 255, 0);
             display: block;
             z-index: 5;
         }
 
-        /* Footer Layer Configurations */
+        /* Footer Layer Configurations for Contact Page */
         .footer-action-layer {
             position: absolute;
             top: 0;
@@ -137,10 +122,10 @@
         }
         .email-card-hotspot {
             position: absolute;
-            top: 15%;
-            left: 10%;
-            width: 80%;
-            height: 45%;
+            top: 20%;
+            left: 15%;
+            width: 70%;
+            height: 40%;
             cursor: pointer;
             background: rgba(255, 255, 255, 0);
             display: block;
@@ -182,68 +167,63 @@
 </head>
 <body>
 
+    <!-- Invisible Fixed Header Click Layer sitting over all pages -->
+    <nav class="global-nav-overlay">
+        <div class="nav-link-hotspot" onclick="switchPage('home_page')" title="Home"></div>
+        <div class="nav-link-hotspot" onclick="switchPage('about_page')" title="About"></div>
+        <div class="nav-link-hotspot width-founder" onclick="switchPage('founder_page')" title="Meet the Founder"></div>
+        <div class="nav-link-hotspot" onclick="switchPage('music_page')" title="Music Releases"></div>
+        <div class="nav-link-hotspot width-sync" onclick="switchPage('sync_page')" title="Sync & Music Licensing"></div>
+        <div class="nav-link-hotspot" onclick="switchPage('contact_page')" title="Get in Touch"></div>
+    </nav>
+
     <!-- Main visual layout container -->
     <main class="portfolio-container">
 
-        <!-- FIXED GLOBAL HEADER BANNER: This section contains your top menu buttons and stays locked to the top -->
-        <header class="header-nav-section">
-            <!-- Transparent Invisible Navigation Overlay Layer Mapping -->
-            <div class="nav-overlay-container">
-                <a href="#home" class="nav-link-hotspot" title="Home"></a>
-                <a href="#about" class="nav-link-hotspot" title="About"></a>
-                <a href="#founder" class="nav-link-hotspot width-founder" title="Meet the Founder"></a>
-                <a href="#music" class="nav-link-hotspot" title="Music Releases"></a>
-                <a href="#sync" class="nav-link-hotspot width-sync" title="Sync & Music Licensing"></a>
-                <a href="#contact" class="nav-link-hotspot" title="Get in Touch"></a>
-            </div>
-            
-            <img src="HOME.png" alt="Musicians of Christ Official Header Banner Menu Row">
-        </header>
-
-        <!-- PAGE CONTAINER VIEWS SLOT -->
-
-        <!-- SUB-PAGE 1: HOME COVER LAYOUT (Visible by Default) -->
-        <div id="home" class="canva-page-view page-active-default">
+        <!-- PAGE 1: HOME (Loads first automatically) -->
+        <div id="home_page" class="canva-page-view active-page">
             <h1 class="seo-shadow-text">Musicians of Christ - Official Music Ministry Platform</h1>
             <p class="seo-shadow-text">Welcome to the official platform for Musicians of Christ, led by Jena Alvin.</p>
-            
-            <!-- We show your clean HOME artwork design frame here as the starting visual presentation -->
             <img src="HOME.png" alt="Musicians of Christ Cover Splash Layout Area">
         </div>
 
-        <!-- SUB-PAGE 2: ABOUT -->
-        <div id="about" class="canva-page-view">
+        <!-- PAGE 2: ABOUT -->
+        <div id="about_page" class="canva-page-view">
             <h2 class="seo-shadow-text">About Musicians of Christ</h2>
             <img src="ABOUT.png" alt="About Musicians of Christ">
         </div>
 
-        <!-- SUB-PAGE 3: FOUNDER & LEADER -->
-        <div id="founder" class="canva-page-view">
+        <!-- PAGE 3: FOUNDER & LEADER -->
+        <div id="founder_page" class="canva-page-view">
             <h2 class="seo-shadow-text">Founder & Leader - Jena Alvin</h2>
             <img src="FOUNDER%20&%20LEADER.png" alt="Musicians of Christ Founder & Leader Section">
         </div>
 
-        <!-- SUB-PAGE 4: MUSIC & ALBUM STORES -->
-        <div id="music" class="canva-page-view">
+        <!-- PAGE 4: MUSIC & ALBUM STORES -->
+        <div id="music_page" class="canva-page-view">
             <h2 class="seo-shadow-text">Music Releases, Contemporary Worship, and Discography</h2>
-            <p class="seo-shadow-text">Stream our music albums across Spotify, Apple Music, YouTube Music, and Amazon Music.</p>
-            
             <div class="music-stores-overlay">
                 <a href="https://spotify.com" target="_blank" class="store-btn" title="Stream on Spotify"></a>
                 <a href="https://apple.com" target="_blank" class="store-btn" title="Listen on Apple Music"></a>
                 <a href="https://youtube.com" target="_blank" class="store-btn" title="Watch on YouTube Music"></a>
                 <a href="https://amazon.com" target="_blank" class="store-btn" title="Listen on Amazon Music"></a>
             </div>
-            
             <img src="MUSIC.png" alt="Musicians of Christ Music Showcase Section">
         </div>
 
-        <!-- SUB-PAGE 5: SYNC & LICENSING -->
-        <div id="sync" class="canva-page-view">
+        <!-- PAGE 5: SYNC & LICENSING -->
+        <div id="sync_page" class="canva-page-view">
             <h2 class="seo-shadow-text">Music Sync & licensing</h2>
-            <p class="seo-shadow-text">Email us directly at musiciansofchrist@yahoo.com for film and television music sync licensing requests.</p>
-            
             <a href="mailto:musiciansofchrist@://yahoo.com" class="sync-email-hotspot" title="Request Licensing Quote"></a>
-            
             <img src="SYNC%20&%20LICENSING.png" alt="Music Sync & Licensing Info Section">
         </div>
+
+        <!-- PAGE 6: CONTACT -->
+        <div id="contact_page" class="canva-page-view">
+            <h2 class="seo-shadow-text">Contact Musicians of Christ</h2>
+            <div class="footer-action-layer">
+                <a href="mailto:musiciansofchrist@://yahoo.com" class="email-card-hotspot" title="Email Musicians of Christ"></a>
+                <div class="socials-row-hotspot">
+                    <a href="https://tiktok.com" target="_blank" class="social-btn" title="TikTok"></a>
+                    <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn"></a>
+                    <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram"></a>
