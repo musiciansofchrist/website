@@ -22,6 +22,9 @@
             padding: 0;
             box-sizing: border-box;
         }
+        html {
+            scroll-behavior: smooth; /* Enables elegant, smooth scrolling when headings are clicked */
+        }
         body {
             background: linear-gradient(90deg, #e7dfd8, #808077, #c6c6c6);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -31,50 +34,45 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
-        /* FIXED GLOBAL NAVIGATION LAYER - Sits perfectly over the header menu of every page */
-        .global-nav-overlay {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
+        .canva-section {
             width: 100%;
-            max-width: 1200px;
-            height: 75px; /* Fits exactly over the top heading text row */
+            position: relative;
+            display: block;
+        }
+        .canva-section img {
+            width: 100%;
+            height: auto;
+            display: block; /* Removes the tiny default spacing gap under web images */
+        }
+        
+        /* HEADER INTERACTIVE HOTSPOT NAVIGATION ROW */
+        .nav-overlay-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8%; /* Covers your header navigation banner area height dynamically */
             display: flex;
             justify-content: flex-end; 
             align-items: center;
-            padding-right: 3%;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0); /* Completely clear invisible buttons */
+            padding-right: 4%;
+            z-index: 10;
         }
         .nav-link-hotspot {
-            height: 45px;
-            margin-left: 15px;
+            height: 40px;
+            margin-left: 20px;
             cursor: pointer;
             display: inline-block;
             background: rgba(255, 255, 255, 0); 
-            width: 75px; 
+            text-decoration: none;
+            width: 70px; 
         }
-        .width-founder { width: 145px; }
-        .width-sync { width: 135px; }
-
-        /* MULTI-PAGE CONTROLLER */
-        .canva-page-view {
-            width: 100%;
-            position: relative;
-            display: none; /* Hides all pages by default to prevent overlapping long scrolling */
-        }
-        .active-page {
-            display: block !important; /* Only shows the single selected active layout */
-        }
-        .canva-page-view img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .width-founder { width: 140px; }
+        .width-sync { width: 130px; }
 
         /* Dynamic Streaming Stores Button Overlay Grid */
         .music-stores-overlay {
@@ -83,7 +81,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 70%; 
-            height: 9%;
+            height: 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -101,17 +99,17 @@
         /* Direct Click-to-Email Hotspot Wrapper for Sync Page */
         .sync-email-hotspot {
             position: absolute;
-            top: 25%;
-            left: 10%;
-            width: 80%;
-            height: 50%;
+            top: 20%;
+            left: 5%;
+            width: 90%;
+            height: 60%;
             cursor: pointer;
             background: rgba(255, 255, 255, 0);
             display: block;
             z-index: 5;
         }
 
-        /* Footer Layer Configurations for Contact Page */
+        /* Footer Layer Configurations for Contact Page Buttons */
         .footer-action-layer {
             position: absolute;
             top: 0;
@@ -122,10 +120,10 @@
         }
         .email-card-hotspot {
             position: absolute;
-            top: 20%;
-            left: 15%;
-            width: 70%;
-            height: 40%;
+            top: 15%;
+            left: 10%;
+            width: 80%;
+            height: 45%;
             cursor: pointer;
             background: rgba(255, 255, 255, 0);
             display: block;
@@ -167,63 +165,72 @@
 </head>
 <body>
 
-    <!-- Invisible Fixed Header Click Layer sitting over all pages -->
-    <nav class="global-nav-overlay">
-        <div class="nav-link-hotspot" onclick="switchPage('home_page')" title="Home"></div>
-        <div class="nav-link-hotspot" onclick="switchPage('about_page')" title="About"></div>
-        <div class="nav-link-hotspot width-founder" onclick="switchPage('founder_page')" title="Meet the Founder"></div>
-        <div class="nav-link-hotspot" onclick="switchPage('music_page')" title="Music Releases"></div>
-        <div class="nav-link-hotspot width-sync" onclick="switchPage('sync_page')" title="Sync & Music Licensing"></div>
-        <div class="nav-link-hotspot" onclick="switchPage('contact_page')" title="Get in Touch"></div>
-    </nav>
-
     <!-- Main visual layout container -->
     <main class="portfolio-container">
 
-        <!-- PAGE 1: HOME (Loads first automatically) -->
-        <div id="home_page" class="canva-page-view active-page">
+        <!-- SECTION 1: HOME (Includes your master top navigation overlay menu) -->
+        <section id="home" class="canva-section">
             <h1 class="seo-shadow-text">Musicians of Christ - Official Music Ministry Platform</h1>
             <p class="seo-shadow-text">Welcome to the official platform for Musicians of Christ, led by Jena Alvin.</p>
-            <img src="HOME.png" alt="Musicians of Christ Cover Splash Layout Area">
-        </div>
+            
+            <!-- Transparent Invisible Navigation Overlay Layer Mapping -->
+            <div class="nav-overlay-container">
+                <a href="#home" class="nav-link-hotspot" title="Home"></a>
+                <a href="#about" class="nav-link-hotspot" title="About"></a>
+                <a href="#founder" class="nav-link-hotspot width-founder" title="Meet the Founder"></a>
+                <a href="#music" class="nav-link-hotspot" title="Music Releases"></a>
+                <a href="#sync" class="nav-link-hotspot width-sync" title="Sync & Music Licensing"></a>
+                <a href="#contact" class="nav-link-hotspot" title="Get in Touch"></a>
+            </div>
+            
+            <img src="HOME.png" alt="Musicians of Christ Official Landing Layout Cover">
+        </section>
 
-        <!-- PAGE 2: ABOUT -->
-        <div id="about_page" class="canva-page-view">
+        <!-- SECTION 2: ABOUT -->
+        <section id="about" class="canva-section">
             <h2 class="seo-shadow-text">About Musicians of Christ</h2>
             <img src="ABOUT.png" alt="About Musicians of Christ">
-        </div>
+        </section>
 
-        <!-- PAGE 3: FOUNDER & LEADER -->
-        <div id="founder_page" class="canva-page-view">
+        <!-- SECTION 3: FOUNDER & LEADER -->
+        <section id="founder" class="canva-section">
             <h2 class="seo-shadow-text">Founder & Leader - Jena Alvin</h2>
             <img src="FOUNDER%20&%20LEADER.png" alt="Musicians of Christ Founder & Leader Section">
-        </div>
+        </section>
 
-        <!-- PAGE 4: MUSIC & ALBUM STORES -->
-        <div id="music_page" class="canva-page-view">
+        <!-- SECTION 4: MUSIC & ALBUM STORES -->
+        <section id="music" class="canva-section">
             <h2 class="seo-shadow-text">Music Releases, Contemporary Worship, and Discography</h2>
+            
+            <!-- Side-by-side active button hotspots over your music streaming icons -->
             <div class="music-stores-overlay">
                 <a href="https://spotify.com" target="_blank" class="store-btn" title="Stream on Spotify"></a>
                 <a href="https://apple.com" target="_blank" class="store-btn" title="Listen on Apple Music"></a>
                 <a href="https://youtube.com" target="_blank" class="store-btn" title="Watch on YouTube Music"></a>
                 <a href="https://amazon.com" target="_blank" class="store-btn" title="Listen on Amazon Music"></a>
             </div>
+            
             <img src="MUSIC.png" alt="Musicians of Christ Music Showcase Section">
-        </div>
+        </section>
 
-        <!-- PAGE 5: SYNC & LICENSING -->
-        <div id="sync_page" class="canva-page-view">
+        <!-- SECTION 5: SYNC & LICENSING -->
+        <section id="sync" class="canva-section">
             <h2 class="seo-shadow-text">Music Sync & licensing</h2>
+            
+            <!-- Direct email hotspot covering the sync description text card space -->
             <a href="mailto:musiciansofchrist@://yahoo.com" class="sync-email-hotspot" title="Request Licensing Quote"></a>
+            
             <img src="SYNC%20&%20LICENSING.png" alt="Music Sync & Licensing Info Section">
-        </div>
+        </section>
 
-        <!-- PAGE 6: CONTACT -->
-        <div id="contact_page" class="canva-page-view">
+        <!-- SECTION 6: CONTACT & SOCIAL FOOTER -->
+        <section id="contact" class="canva-section">
             <h2 class="seo-shadow-text">Contact Musicians of Christ</h2>
+            
             <div class="footer-action-layer">
+                <!-- Action 1: Tap to Email -->
                 <a href="mailto:musiciansofchrist@://yahoo.com" class="email-card-hotspot" title="Email Musicians of Christ"></a>
+                
+                <!-- Action 2: Social Links Overlay Router (Tied precisely over your graphic circular buttons) -->
                 <div class="socials-row-hotspot">
                     <a href="https://tiktok.com" target="_blank" class="social-btn" title="TikTok"></a>
-                    <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn"></a>
-                    <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram"></a>
